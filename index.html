@@ -3,9 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Do You Love Me? ❤️</title>
+
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -15,7 +20,9 @@ body {
   background: linear-gradient(135deg, #ffd6e7, #ffeef5);
   font-family: Arial, sans-serif;
   text-align: center;
+  overflow: hidden;
 }
+
 .card {
   background: white;
   width: 90%;
@@ -24,9 +31,21 @@ body {
   border-radius: 25px;
   box-shadow: 0 10px 30px #e99ab755;
 }
-.cat { font-size: 100px; animation: bounce 1.5s infinite; }
-h1 { color: #e75480; font-size: 27px; }
-p { color: #777; }
+
+.cat {
+  font-size: 100px;
+  animation: bounce 1.5s infinite;
+}
+
+h1 {
+  color: #e75480;
+  font-size: 27px;
+}
+
+p {
+  color: #777;
+}
+
 button {
   border: none;
   padding: 13px 28px;
@@ -36,15 +55,48 @@ button {
   margin: 8px;
   transition: 0.3s;
 }
-#yes { background: #ff5c9d; color: white; }
-#no { background: #eee; color: #555; }
-button:hover { transform: scale(1.1); }
-#result { color: #e75480; font-size: 22px; font-weight: bold; margin-top: 20px; }
+
+#yes {
+  background: #ff5c9d;
+  color: white;
+}
+
+#no {
+  background: #eee;
+  color: #555;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+#result {
+  color: #e75480;
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+.credit {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 9999;
+  color: #e75480;
+  font-size: 13px;
+  font-weight: bold;
+  background: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px #e7548033;
+}
 
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-15px); }
 }
+
 .heart {
   position: fixed;
   bottom: -30px;
@@ -52,62 +104,89 @@ button:hover { transform: scale(1.1); }
   animation: float 3s linear forwards;
   pointer-events: none;
 }
-@keyframes float {
-  to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
-}
 
-/* EITA NOTUN ADD KORSI */
-.credit {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: white;
-  padding: 8px 14px;
-  border-radius: 20px;
-  box-shadow: 0 2px 8px #e7548033;
-  color: #e75480;
-  font-weight: bold;
-  font-size: 14px;
-  z-index: 10;
+@keyframes float {
+  to {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
 }
 </style>
 </head>
+
 <body>
 
 <div class="card">
+
   <div class="cat" id="cat">🐱</div>
+
   <h1>Do you love me? ❤️</h1>
-  <p>Please choose your answer 🥺</p>
+
+  <p id="message">Please choose your answer 🥺</p>
+
   <button id="yes" onclick="love()">YES 💗</button>
+
   <button id="no" onclick="tryAgain()">NO 💔</button>
+
   <div id="result"></div>
+
 </div>
 
-<!-- EITA O NOTUN ADD KORSI -->
 <div class="credit">Made By Shoab ❤️</div>
 
 <script>
+
+let attempts = 0;
+
 function tryAgain() {
-  document.getElementById("result").innerHTML = "Try Again! 🥺💕";
+
+  attempts++;
+
   document.getElementById("cat").innerHTML = "😿";
+
+  document.getElementById("message").innerHTML =
+    "You clicked NO " + attempts + " times!";
+
+  document.getElementById("result").innerHTML =
+    "Please Try Again! 🥺💗";
+
 }
+
 function love() {
+
   document.getElementById("cat").innerHTML = "😻";
-  document.getElementById("result").innerHTML = "Ohh seriously? 🥹<br>I love you too! ❤️";
+
+  document.getElementById("message").innerHTML =
+    "You made me so happy!";
+
+  document.getElementById("result").innerHTML =
+    "Ohh Seriously? 🥹<br>I love you too! ❤️";
+
   document.getElementById("yes").style.display = "none";
   document.getElementById("no").style.display = "none";
-  for (let i = 0; i < 25; i++) {
+
+  for (let i = 0; i < 30; i++) {
     setTimeout(createHeart, i * 100);
   }
+
 }
+
 function createHeart() {
+
   const heart = document.createElement("div");
+
   heart.className = "heart";
   heart.innerHTML = "❤️";
+
   heart.style.left = Math.random() * 100 + "vw";
+
   document.body.appendChild(heart);
+
   setTimeout(() => heart.remove(), 3000);
+
 }
+
 </script>
+
 </body>
 </html>
